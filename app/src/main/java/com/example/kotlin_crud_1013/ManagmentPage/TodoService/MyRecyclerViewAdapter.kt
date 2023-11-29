@@ -9,6 +9,7 @@ class MyRecyclerViewAdapter(todolist: LiveData<List<TodoTable>>) :
     RecyclerView.Adapter<MyRecyclerViewAdapter.MyViewHolder>() {
 
     private var _todoList: LiveData<List<TodoTable>> = todolist
+    private val _todo = emptyList<TodoTable>()
 
     class MyViewHolder(binding: TodoHolderBinding) : RecyclerView.ViewHolder(binding.root) {
         val _title = binding.title
@@ -24,17 +25,19 @@ class MyRecyclerViewAdapter(todolist: LiveData<List<TodoTable>>) :
     // 뷰 홀더에 데이터를 바인딩
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
 
-        val itemList = _todoList.value
-        if (itemList != null && position < itemList.size) {
-            val item = itemList[position]
+            val item = _todo[position]
             holder._title.text = item.todo
-        }
+
     }
 
     // 뷰 홀더의 개수 리턴
     override fun getItemCount(): Int {
-        return _todoList.value?.size ?: 0
+        return _todo.size
     }
 
-
+    fun setData(Todo:LiveData<List<TodoTable>>)
+    {
+        this._todoList = Todo
+        notifyDataSetChanged()
+    }
 }

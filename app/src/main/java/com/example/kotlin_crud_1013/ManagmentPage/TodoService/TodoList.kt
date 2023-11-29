@@ -34,8 +34,9 @@ class TodoList : AppCompatActivity() {
 
         val recyclerView:RecyclerView = binding.recyclerView
         val adapter = MyRecyclerViewAdapter(todolist)
+        recyclerView.layoutManager = LinearLayoutManager(this)
 
         recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(this)
+
     }
 }
