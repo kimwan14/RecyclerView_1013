@@ -5,35 +5,33 @@ import com.example.kotlin_crud_1013.ManagmentPage.TodoService.TodoData.TodoDao
 import com.example.kotlin_crud_1013.ManagmentPage.TodoService.TodoData.TodoDatabase
 import com.example.kotlin_crud_1013.ManagmentPage.TodoService.TodoData.TodoTable
 
-class repository (todoDatabase: TodoDatabase){
+class repository(todoDatabase: TodoDatabase) {
 
     private val todoDao = todoDatabase.getTodoDao()
-    val readAllData : LiveData<List<TodoTable>> = todoDao.getAll()
+    val readAllData: LiveData<List<TodoTable>> = todoDao.getAll()
 
-    companion object{
+    companion object {
         private var instance: repository? = null
-        fun getInstance(database: TodoDatabase):repository{
+        fun getInstance(database: TodoDatabase): repository {
             return instance
-                ?: synchronized(this){
+                ?: synchronized(this) {
                     val _instance = repository(database)
-                    instance= _instance
+                    instance = _instance
                     _instance
                 }
         }
     }
-    suspend fun addData(todo: TodoTable){
+
+    suspend fun addData(todo: TodoTable) {
         todoDao.insertData(todo)
     }
 
-    suspend fun delect(todo: TodoTable){
+    suspend fun delect(todo: TodoTable) {
         todoDao.delect(todo)
     }
 
-    suspend fun update(todo: TodoTable){
+    suspend fun update(todo: TodoTable) {
         todoDao.updata(todo)
     }
 
-    suspend fun getAll(todo: TodoTable){
-        todoDao.getAll()
-    }
 }

@@ -21,7 +21,7 @@ abstract class TodoDatabase : RoomDatabase() {
                 "TODO"
             ).fallbackToDestructiveMigration().build()
 
-        fun getInstance(context: Context, scope: CoroutineScope): TodoDatabase =
+        fun getInstance(context: Context): TodoDatabase =
             INSTANCE ?: synchronized(this) {
                 INSTANCE ?: buildDatabase(context).also { INSTANCE = it }
             }

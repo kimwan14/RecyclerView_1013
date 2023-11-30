@@ -15,7 +15,7 @@ import com.example.kotlin_crud_1013.Repository.repository
 
 class TodoViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val _repository: repository = repository(TodoDatabase.getInstance(application, viewModelScope))
+    private val _repository: repository = repository(TodoDatabase.getInstance(application))
 
     var getAll: LiveData<List<TodoTable>> = _repository.readAllData
     suspend fun addTodo(Data: TodoTable) {
@@ -30,7 +30,4 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
         _repository.update(Data)
     }
 
-    suspend fun getDataAll(): LiveData<List<TodoTable>>{
-        return getAll
-    }
 }

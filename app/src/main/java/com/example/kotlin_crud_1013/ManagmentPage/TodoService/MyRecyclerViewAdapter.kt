@@ -1,43 +1,38 @@
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
+import com.example.kotlin_crud_1013.ManagmentPage.TodoService.MyViewHolder
 import com.example.kotlin_crud_1013.ManagmentPage.TodoService.TodoData.TodoTable
+import com.example.kotlin_crud_1013.R
 import com.example.kotlin_crud_1013.databinding.TodoHolderBinding
 
-class MyRecyclerViewAdapter(todolist: LiveData<List<TodoTable>>) :
-    RecyclerView.Adapter<MyRecyclerViewAdapter.MyViewHolder>() {
+class MyRecyclerViewAdapter: RecyclerView.Adapter<MyViewHolder>() {
 
-    private var _todoList: LiveData<List<TodoTable>> = todolist
-    private val _todo = emptyList<TodoTable>()
+    val TAG: String = "로그"
 
-    class MyViewHolder(binding: TodoHolderBinding) : RecyclerView.ViewHolder(binding.root) {
-        val _title = binding.title
-    }
+    private var todoList = listOf<TodoTable>()
 
-    // 어떤 xml 으로 뷰 홀더를 생성할지 지정
+    //뷰홀더가 설정 되었을때
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val binding = TodoHolderBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-
-        return MyViewHolder(binding)
+     //연결할 레이아웃 설정
+        return MyViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.todo_holder,parent))
     }
 
-    // 뷰 홀더에 데이터를 바인딩
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-
-            val item = _todo[position]
-            holder._title.text = item.todo
-
-    }
-
-    // 뷰 홀더의 개수 리턴
     override fun getItemCount(): Int {
-        return _todo.size
+        // 목록의 아이템 수
+        return this.todoList.size
     }
 
-    fun setData(Todo:LiveData<List<TodoTable>>)
-    {
-        this._todoList = Todo
-        notifyDataSetChanged()
+    //뷰와 뷰홀더가 묶였을 때
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        Log.d(TAG,"onBindViewHolder() called")
+        holder.bind(this.todoList[position])
     }
+
+    fun todolist(todoTable: List<TodoTable>){
+        this.todoList = todoTable
+    }
+
 }

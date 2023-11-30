@@ -9,34 +9,31 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kotlin_crud_1013.ManagmentPage.TodoService.TodoData.TodoDatabase
 import com.example.kotlin_crud_1013.ManagmentPage.TodoService.TodoData.TodoTable
+import com.example.kotlin_crud_1013.Repository.repository
 import com.example.kotlin_crud_1013.databinding.TodoRecyclerViewBinding
 
 class TodoList : AppCompatActivity() {
     private lateinit var db : TodoDatabase
+    private lateinit var todoViewModel: TodoViewModel
+
+    private val todoData: LiveData<List<TodoTable>> = todoViewModel.getAll
 
     private val binding : TodoRecyclerViewBinding by lazy {
         TodoRecyclerViewBinding.inflate(layoutInflater)
     }
 
-//    init{
-//        val todolist : LiveData<List<TodoTable>> = db.getTodoDao().getData()
-//
-//        Log.d("SHOW", "${todolist}")
-//    }
+    private lateinit var myRecyclerViewAdapter: MyRecyclerViewAdapter
 
+    private val TAG:String = "로그"
+
+    init {
+        Log.d(TAG,"DataList &todoData")
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(binding.root)
 
 
-        db = TodoDatabase.getInstance(this)
-
-        val todolist : LiveData<List<TodoTable>> = db.getTodoDao().getData()
-
-        val recyclerView:RecyclerView = binding.recyclerView
-        val adapter = MyRecyclerViewAdapter(todolist)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-
-        recyclerView.adapter = adapter
-
+        myRecyclerViewAdapter = MyRecyclerViewAdapter()
     }
 }
