@@ -33,7 +33,7 @@ class Sign : AppCompatActivity() {
 
             if (email.isNotEmpty() && password.isNotEmpty()) {
                 CoroutineScope(Dispatchers.IO).launch {
-                    if (db.getLoginDao().getEmailList().contains(email)) {
+                    if (db.getLoginDao().getEmailList().contains(email)) { // 이메일 리스트를 가져와 데이터가 포함된경우 진행
                         if (db.getLoginDao().getPasswordByEmail(email) == password) {
                             withContext(Dispatchers.Main) {
                                 Toast.makeText(
