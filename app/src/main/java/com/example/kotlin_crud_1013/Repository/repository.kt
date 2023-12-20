@@ -4,23 +4,23 @@ import androidx.lifecycle.LiveData
 import com.example.kotlin_crud_1013.ManagmentPage.TodoService.TodoData.TodoDao
 import com.example.kotlin_crud_1013.ManagmentPage.TodoService.TodoData.TodoDatabase
 import com.example.kotlin_crud_1013.ManagmentPage.TodoService.TodoData.TodoTable
+import com.example.kotlin_crud_1013.login.UserDatabase
 
-class repository(todoDatabase: TodoDatabase) {
+class repository(private val todoDao: TodoDao) {
 
-    private val todoDao = todoDatabase.getTodoDao()
     val readAllData: LiveData<List<TodoTable>> = todoDao.getAll()
 
-    companion object {
-        private var instance: repository? = null
-        fun getInstance(database: TodoDatabase): repository {
-            return instance
-                ?: synchronized(this) {
-                    val _instance = repository(database)
-                    instance = _instance
-                    _instance
-                }
-        }
-    }
+//    companion object {
+//        private var instance: repository? = null
+//        fun getInstance(database: TodoDatabase): repository {
+//            return instance
+//                ?: synchronized(this) {
+//                    val _instance = repository(database)
+//                    instance = _instance
+//                    _instance
+//                }
+//        }
+//    }
 
     suspend fun addData(todo: TodoTable) {
         todoDao.insertData(todo)
