@@ -1,20 +1,12 @@
 package com.example.kotlin_crud_1013.ManagmentPage.TodoService
 
 import MyRecyclerViewAdapter
-import android.icu.lang.UCharacter.VerticalOrientation
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
-import com.example.kotlin_crud_1013.ManagmentPage.TodoService.TodoData.TodoDatabase
-import com.example.kotlin_crud_1013.ManagmentPage.TodoService.TodoData.TodoTable
-import com.example.kotlin_crud_1013.R
-import com.example.kotlin_crud_1013.Repository.repository
+import com.example.kotlin_crud_1013.ViewModel.TodoViewModel
 import com.example.kotlin_crud_1013.databinding.TodoRecyclerViewBinding
 
 class TodoList : AppCompatActivity() {
@@ -35,7 +27,8 @@ class TodoList : AppCompatActivity() {
         setContentView(binding.root)
         //binding = DataBindingUtil.setContentView(this, R.layout.todo_recycler_view)
 
-        todoViewModel = ViewModelProvider(this,TodoViewModel.Factory(application)).get(TodoViewModel::class.java)
+        todoViewModel = ViewModelProvider(this, TodoViewModel.Factory(application)).get(
+            TodoViewModel::class.java)
 
 
         binding.recyclerView.layoutManager = LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)

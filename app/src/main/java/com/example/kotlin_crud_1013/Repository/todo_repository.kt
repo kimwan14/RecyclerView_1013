@@ -2,11 +2,9 @@ package com.example.kotlin_crud_1013.Repository
 
 import androidx.lifecycle.LiveData
 import com.example.kotlin_crud_1013.ManagmentPage.TodoService.TodoData.TodoDao
-import com.example.kotlin_crud_1013.ManagmentPage.TodoService.TodoData.TodoDatabase
 import com.example.kotlin_crud_1013.ManagmentPage.TodoService.TodoData.TodoTable
-import com.example.kotlin_crud_1013.login.UserDatabase
 
-class repository(private val todoDao: TodoDao) {
+class todo_repository(private val todoDao: TodoDao) {
 
     val readAllData: LiveData<List<TodoTable>> = todoDao.getAll()
 

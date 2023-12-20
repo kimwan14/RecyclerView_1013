@@ -1,15 +1,12 @@
 package com.example.kotlin_crud_1013.ManagmentPage.TodoService
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.example.kotlin_crud_1013.ManagmentPage.TodoService.TodoData.TodoDatabase
 import com.example.kotlin_crud_1013.ManagmentPage.TodoService.TodoData.TodoTable
-import com.example.kotlin_crud_1013.Repository.repository
+import com.example.kotlin_crud_1013.ViewModel.TodoViewModel
 import com.example.kotlin_crud_1013.databinding.InputdataBinding
-import com.example.kotlin_crud_1013.login.UserDatabase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
